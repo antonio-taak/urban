@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+{% load static %}
+{% block titolo %}Login{% endblock %}
+
+{% block css %}
+    {{ block.super }}
+    <style>
+        #immagine {
+            padding: 0px;
+            height: 100vh;
+        }
+        #immagine img{
+            height: 100%;
+            width: 100%;
+        }
+        #login-form {
+            width: 400px;
+            height: 600px;
+            border-radius: 16px;
+        }
+        #benvenuto {
+            color: #94AA26;
+            font-weight: 600;
+            font-size: 22px;
+            margin-top: 28px;
+        }
+        #effettua-login {
+            font-size: 14px;
+            color: #7D7D77;
+        }
+        .form-group p{
+            text-align: left;
+            margin-bottom: 5px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .form-group span{
+            position: absolute;
+            right: 280px;
+            bottom: 235px;
+            cursor: pointer;
+        }
+
+        #occhio{
+            color: #8D8D8D;
+            position: absolute;
+            right: 280px;
+            bottom: 255px;
+            cursor: pointer;
+        }
+        .eye-err{
+            bottom: 238px !important;
+        }
+
+        @media (min-width: 1900px) {
+            #occhio{
+                right: 425px;
+                bottom: 442px;
+            }
+            .eye-err{
+                bottom: 425px !important;
+            }
+        }
+
+        #errore{
+            margin: 0px;
+            margin-left: 20px;
+            text-align: left;
+            font-size: 12px;
+            color: #DB2828;
+        }
+        #remember-me{
+            font-size: 14px;
+            color: #000000CC;
+        }
+        #password-dimenticata {
+            text-decoration: underline;
+            color: #94AA26;
+            font-size: 14px;
+        }
+        #submit{
+            width: 100%;
+            margin-top: 60px;
+        }
+
+
+    </style>
+{% endblock %}
+
+{% block header %}
+
+{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div id="immagine" class="col-sm-5">
+                <img src="{% static 'ManagementSoftware/img/Login.png' %}">
+            </div>
+            <div class="col-sm-7 d-flex text-center justify-content-center align-items-center">
+                <form action="" method="post" novalidate class="shadow p-5" id="login-form">
+                    <img src="{% static 'ManagementSoftware/img/LogoUrbanDesign.png' %}" alt="Icona Login" width="250px"
+                         height="97px">
+                    <p id="benvenuto">Benvenuto</p>
+                    <p id="effettua-login">Effettua il login per accedere al tuo account</p>
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <p>Username</p>
+                        {{ form.username }}
+                        <small class="text-danger">{{ fm.errors|striptags }}</small>
+                    </div>
+
+                     {% if form.non_field_errors %}
+                        {% for error in form.non_field_errors %}
+                            {% if form.errors %}
+                                <p id="errore">Username o Password errati</p>
+
+                            {% endif %}
+
+                        {% endfor %}
+                    {% endif %}
+
+                    <div class="form-group">
+                        <p>Password</p>
+                        {{ form.password }} <i id="occhio" class="fa-solid fa-eye" onclick="togglePassword()"></i>
+
+                        <small class="text-danger">{{ fm.errors|striptags }}</small>
+                    </div>
+
+                    {% if form.non_field_errors %}
+                        {% for error in form.non_field_errors %}
+                            {% if form.errors %}
+                                <script>
+                                    document.getElementById("occhio").classList.add("eye-err");
+                                </script>
+
+                            {% endif %}
+
+                        {% endfor %}
+                    {% endif %}
+
+                    <script>
+                        var stato = false;
+                        var occhio = document.getElementById("occhio");
+                        function togglePassword(){
+                            if(stato){
+                                document.getElementById("id_password").setAttribute("type", "password");
+                                stato = false;
+                                occhio.classList.add("fa-eye");
+                                occhio.classList.remove("fa-eye-slash");
+                            }else{
+                                document.getElementById("id_password").setAttribute("type", "text");
+                                stato = true;
+                                occhio.classList.remove("fa-eye");
+                                occhio.classList.add("fa-eye-slash");
+                            }
+                        }
+                    </script>
+
+                    <div class="row">
+                        <div id="remember-me" class="col-sm-5">
+                            {{ form.remember_me }} Ricordami
+                        </div>
+                        <div class="col-sm-7">
+                            <a id="password-dimenticata" href="#">Password Dimenticata</a>
+                        </div>
+                    </div>
+
+
+
+                    <input id="submit" type="submit" class="btn btn-primary btn-lg arancione" value="LOGIN">
+                    <br>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

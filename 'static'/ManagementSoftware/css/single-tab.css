@@ -1,0 +1,98 @@
+.container{
+    border-radius: 16px;
+    box-shadow: 0px 4px 30px #e2e2e2;
+}
+
+h3 {
+    font-weight: bold;
+}
+
+.modal h3 {
+    font-weight: bold;
+    color: #DF8819;
+    margin-bottom: 31px;
+}
+
+
+table {
+    border: 0 solid !important;
+}
+
+.search-bar {
+    margin-top: 20px;
+}
+
+thead {
+    background-color: #FAFAFA;
+    color: #707070;
+}
+
+.table-wrapper {
+    max-height: 600px;
+    overflow: auto;
+    display: inline-block;
+}
+
+.table-wrapper thead {
+    position: sticky;
+    top: 0;
+}
+
+tbody td {
+    color: #707070;
+    font-size: 16px;
+}
+
+tbody tr {
+    border-bottom: 1px solid #e6e6e6;
+}
+
+th.icon {
+    width: 1% !important;
+}
+
+.modal label {
+    font-weight: bold;
+    font-size: 14px;
+    color: #707070;
+}
+
+.modal-content {
+    padding-top: 3%;
+    padding-bottom: 5%;
+    border-radius: 20px
+}
+
+button.action, button.action:focus-visible, button.action:focus {
+    border: none;
+    font-size: 18px;
+    border-radius: 2px;
+    color: #707070;
+    background-color: #F6F6F6;
+    padding: 3px 17px;
+    width: 100%;
+}
+
+.dropdown-menu span {
+    margin-left: 10px;
+}
+
+.dropdown-menu li span:hover {
+    text-decoration: underline;
+}
+
+.dropdown-menu li:first-child {
+    margin-top: 5px;
+}
+
+::-webkit-scrollbar {
+    width: 5px; /* width of the entire scrollbar */
+}
+
+::-webkit-scrollbar-track {
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #BBBBBB; /* color of the scroll thumb */
+    border-radius: 20px; /* roundness of the scroll thumb */
+}

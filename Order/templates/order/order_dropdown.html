@@ -1,0 +1,4 @@
+<option value="Site">---------</option>
+{% for site in sites %}
+<option value="{{ site.pk }}">{{ site.name }}</option>
+{% endfor %}

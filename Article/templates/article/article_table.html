@@ -1,0 +1,31 @@
+{% load static %}
+
+<thead>
+<tr>
+    <th>ARTICOLO</th>
+    <th>UNITÀ DI MISURA</th>
+    <th>FORNITORE</th>
+    <th class="icon"></th>
+    <th class="icon"></th>
+</tr>
+</thead>
+<tbody>
+{% for article in articles %}
+    <tr>
+        <td>{{ article.name }}</td>
+        <td>{{ article.measurement_unit }}</td>
+        <td>{{ article.supplier_id.name }}</td>
+        <td>
+            <img class="update"
+                 src="{% static 'ManagementSoftware/img/IconaModifica.png' %}" width="30px" alt="Modifica"
+                 data-form-url="{% url 'article_update' article.pk %}">
+        </td>
+        <td>
+            <img class="delete"
+                 src="{% static 'ManagementSoftware/img/IconaElimina.png' %}" width="30px" alt="Modifica"
+                 data-form-url="{% url 'article_delete' article.pk %}">
+        </td>
+
+    </tr>
+{% endfor %}
+</tbody>

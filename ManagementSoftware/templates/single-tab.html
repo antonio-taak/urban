@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block import %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'ManagementSoftware/css/single-tab.css' %}">
+{% endblock %}
+
+{% block body %}
+    <div class="modal fade" id="create-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog mt-5">
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="modal">
+        <div class="modal-dialog mt-5" role="document">
+            <div class="modal-content"></div>
+        </div>
+    </div>
+
+    <div id="main-container" class="container">
+        <div id="row-sopra" class="row">
+            {% block gray-bar %} {% endblock %}
+        </div>
+
+        <div class="row search-bar">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="search" placeholder="&#xf002 {% block search_placeholder %}{% endblock %}" aria-label="cerca">
+                </div>
+
+                {% block filters %} {% endblock %}
+            </div>
+            <div class="col-md-2">
+                <button class="action" id="download-csv">
+                    Scarica CSV
+                </button>
+            </div>
+            <div class="col-md-2">
+                <button id="nuovo-articolo" class="action create" title="Aggiungi">
+                    Nuovo articolo
+                </button>
+            </div>
+        </div>
+        <div class="table-wrapper">
+            <table class="table table-borderless" id="risultati">
+                {% block table %}{% endblock %}
+            </table>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block jquery %}
+    <script type="text/javascript">
+        $(function () {
+
+            // Create Article Modal Form
+            function createArticleModalForm() {
+                $(".create").modalForm({
+                    formURL: "{% block insert_form %}{% endblock %}",
+                    modalID: "#create-modal"
+                });
+            }
+
+            createArticleModalForm();
+
+            // Update Article Modal Form
+            function updateArticleModalForm() {
+                $(".update").each(function () {
+                    $(this).modalForm({
+                        formURL: $(this).data("form-url"),
+                    });
+                });
+            }
+
+            updateArticleModalForm();
+
+            // Delete Article Modal Form
+            function deleteArticleModalForm() {
+                $(".delete").each(function () {
+                    $(this).modalForm({formURL: $(this).data("form-url"), isDeleteForm: true});
+                });
+            }
+
+            deleteArticleModalForm();
+
+            // Hide message
+            $(".alert").fadeTo(2000, 500).slideUp(500, function () {
+                $(".alert").slideUp(500);
+            });
+        });
+
+        $("#download-csv").on("click", function () {
+            window.location =
+            {% block download-csv %}{% endblock %}
+        })
+
+        $("#search").on("keyup", function () {
+            let value = $(this).val().toLowerCase();
+            $("#risultati tbody tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+
+        $("#fromDate").on("change", function () {
+            let fromDate = $(this).val();
+
+        });
+
+        $("#toDate").on("change", function () {
+            let toDate = $(this).val();
+            
+        });
+
+    </script>
+{% endblock %}

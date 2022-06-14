@@ -1,0 +1,9 @@
+{% extends 'single-tab.html' %}
+
+{% block tab_name %}{% block titolo %}Fornitore{% endblock %}{% endblock %}
+{% block search_placeholder %}Cerca il fornitore{% endblock %}
+
+{% block table %}{% include "supplier/supplier_table.html" %}{% endblock %}
+
+{% block insert_form %}{% url 'supplier_create' %}{% endblock %}
+{% block download-csv %}{% url 'supplier_csv' %}{% endblock %}

@@ -1,0 +1,47 @@
+.testata {
+    margin-left: 2%
+}
+
+#logo {
+    margin-right: 254px;
+}
+
+#menu li {
+    margin-left: 65px;
+    font-size: 20px;
+    color: #EAEAEA;
+}
+
+@media screen and (max-width: 1750px) {
+    #logo {
+        margin-right: 0;
+    }
+
+    #menu li {
+        margin-left: 50px;
+        font-size: 20px;
+        color: #EAEAEA;
+    }
+}
+
+#menu .active a {
+    color: #006529 !important;
+    font-weight: bold;
+    border-bottom: #006529 solid 5px;
+}
+
+#logout {
+    margin-left: 156px !important;
+}
+
+#logout a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5px;
+    font-size: 18px;
+}
+
+#logout a img {
+    margin-left: 10px;
+}

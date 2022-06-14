@@ -1,0 +1,42 @@
+{% load static %}
+
+<thead>
+<tr>
+    <th>ARTICOLO</th>
+    <th>FORNITORE</th>
+    <th>DATA</th>
+    <th>STATO</th>
+    <th>QUANTITÀ</th>
+    <th>UNITÀ</th>
+    <th>CANTIERE</th>
+    <th>CLIENTE</th>
+    <th class="icon"></th>
+    <th class="icon"></th>
+</tr>
+</thead>
+<tbody>
+{% for order in orders %}
+    <tr>
+        <td>{{ order.article_id }}</td>
+        <td>{{ order.article_id.supplier_id }}</td>
+        <td>{{ order.date | date:'d/m/Y' }}</td>
+        <td>{{ order.get_status_display }}</td>
+        <td>{{ order.quantity }}</td>
+        <td>{{ order.article_id.measurement_unit }}</td>
+        <td>{{ order.site_id }}</td>
+        <td>{{ order.site_id.client_id }}</td>
+        <td>
+            <img src="{% static 'ManagementSoftware/img/IconaModifica.png' %}"
+                 class="update"
+                 width="30px" alt="Modifica"
+                 data-form-url="{% url 'order_update' order.pk %}"
+            >
+        </td>
+        <td>
+            <img class="delete"
+                 src="{% static 'ManagementSoftware/img/IconaElimina.png' %}" width="30px" alt="Modifica"
+                 data-form-url="{% url 'order_delete' order.pk %}">
+        </td>
+    </tr>
+{% endfor %}
+</tbody>

@@ -1,0 +1,27 @@
+{% load static %}
+
+<thead>
+<tr>
+    <th>CLIENTE</th>
+    <th class="icon"></th>
+    <th class="icon"></th>
+</tr>
+</thead>
+<tbody>
+{% for client in clients %}
+    <tr>
+        <td>{{ client.name }}</td>
+        <td>
+            <img src="{% static 'ManagementSoftware/img/IconaModifica.png' %}"
+                 class="update" width="30px" alt="Modifica"
+                 data-form-url="{% url 'client_update' client.pk %}"
+            >
+        </td>
+        <td>
+            <img class="delete"
+                 src="{% static 'ManagementSoftware/img/IconaElimina.png' %}" width="30px" alt="Modifica"
+                 data-form-url="{% url 'client_delete' client.pk %}">
+        </td>
+    </tr>
+{% endfor %}
+</tbody>

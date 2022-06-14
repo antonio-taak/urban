@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load static %}
+{% block titolo %}Home{% endblock %}
+
+{% block import %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'ManagementSoftware/css/home.css' %}">
+{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row justify-content-md-center">
+            <div class="col-md text-center shadow blocco" href="{% url 'articles' %}">
+                <img class="img-fluid" src="{% static 'ManagementSoftware/img/Articoli.png' %}" alt="Articoli">
+                <h3>Articoli</h3>
+            </div>
+            <div class="col-md text-center shadow blocco" href="{% url 'suppliers' %}">
+                <img class="img-fluid" src="{% static 'ManagementSoftware/img/Fornitori.png' %}" alt="Forntiroi">
+                <h3>Fornitori</h3>
+            </div>
+            <div class="col-md text-center shadow blocco" href="{% url 'clients' %}">
+                <img class="img-fluid" src="{% static 'ManagementSoftware/img/Clienti.png' %}" alt="Clienti">
+                <h3>Clienti</h3>
+            </div>
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="col-md text-center shadow blocco" href="{% url 'sites' %}">
+                <img class="img-fluid" src="{% static 'ManagementSoftware/img/Cantieri.png' %}" alt="Cantieri">
+                <h3>Cantieri</h3>
+            </div>
+            <div class="col-md text-center shadow blocco" href="{% url 'orders' %}">
+                <img class="img-fluid" src="{% static 'ManagementSoftware/img/Ordini.png' %}" alt="Ordini">
+                <h3>Ordini</h3>
+            </div>
+            <div class="col-md text-center shadow blocco" href="{% url 'archiveorders' %}">
+                <img class="img-fluid" src="{% static 'ManagementSoftware/img/OrdiniArchiviati.png' %}" alt="Impostazioni">
+                <h3>Ordini Archiviati</h3>
+            </div>
+        </div>
+        <button id = "bottoneAggiungi" class="float-right" title="Aggiungi">+</button>
+    </div>
+{% endblock %}
+
+{% block jquery %}
+    <script>
+        $(".blocco").on("click",function(){
+            window.location = $(this).attr("href");
+        })
+        $("#bottoneAggiungi").on("click",function(){
+            window.location.replace("{% url "orders"%}?apriPopup=1");
+        })
+    </script>
+{% endblock %}

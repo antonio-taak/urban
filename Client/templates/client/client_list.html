@@ -1,0 +1,9 @@
+{% extends 'single-tab.html' %}
+
+{% block tab_name %}{% block titolo %}Cliente{% endblock %}{% endblock %}
+{% block search_placeholder %}Cerca l'ordine{% endblock %}
+
+{% block table %}{% include "client/client_table.html" %}{% endblock %}
+
+{% block insert_form %}{% url 'client_create' %}{% endblock %}
+{% block download-csv %}{% url 'client_csv' %}{% endblock %}

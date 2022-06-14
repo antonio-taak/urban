@@ -1,0 +1,9 @@
+{% extends 'single-tab.html' %}
+
+{% block tab_name %}{% block titolo %}Articolo{% endblock %}{% endblock %}
+{% block search_placeholder %}Cerca l'articolo{% endblock %}
+
+{% block table %}{% include "article/article_table.html" %}{% endblock %}
+
+{% block insert_form %}{% url 'article_create' %}{% endblock %}
+{% block download-csv %}{% url 'article_csv' %}{% endblock %}

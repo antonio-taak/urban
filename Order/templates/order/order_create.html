@@ -1,0 +1,116 @@
+{% load widget_tweaks %}
+
+<form method="post" id="orderform" data-clients-url="{% url 'ajax_load_sites' %}" data-suppliers-url="{% url 'ajax_load_suppliers' %}" action="" novalidate>
+    {% csrf_token %}
+
+    <div class="modal-header">
+        <h3 class="modal-title">Crea Ordine</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div class="modal-body">
+
+        <div class="{% if form.non_field_errors %}invalid{% endif %} mb-2">
+            {% for error in form.non_field_errors %}
+                {{ error }}
+            {% endfor %}
+        </div>
+
+        {% for field in form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {% render_field field class="form-control" placeholder=field.label %}
+                <div class="{% if field.errors %} invalid{% endif %}">
+                    {% for error in field.errors %}
+                        <p class="help-block">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary arancione">Crea</button>
+    </div>
+
+</form>
+
+{% block jquery %}
+    <script>
+        $('#lclients').on("change", function () {
+            let url = $("#orderform").attr("data-clients-url");
+            let clientsId = $(this).val();
+            if(!clientsId){
+                clientsId = -1
+            }
+
+            $.ajax({
+                url: url,
+                data: {'clients': clientsId},
+                success: function (data) {
+                    let sites = $("#lsites")
+                    sites.html(data);
+                    sites.selectpicker('refresh');
+                    sites.selectpicker('val', '');
+                },
+                error: function (data) {
+                    console.log("Errore")
+                }
+            });
+        });
+    </script>
+    <script>
+        $("#lsuppliers").change(function () {
+            let url = $("#orderform").attr("data-suppliers-url");
+            let suppliersId = $(this).val();
+            if(!suppliersId){
+                suppliersId = -1
+            }
+
+            $.ajax({
+                url: url,
+                data: {'suppliers': suppliersId},
+                success: function (data) {
+                    let articles = $("#larticles")
+                    articles.html(data);
+                    articles.selectpicker('refresh');
+                    articles.selectpicker('val', '');
+                }
+            });
+
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $(function () {
+                $("#lclients").selectpicker();
+            });
+        });
+        $(document).ready(function () {
+            $(function () {
+                let sites = $("#lsites");
+                sites.html('<option value="">---------</option>');
+                sites.selectpicker();
+            });
+        });
+        $(document).ready(function () {
+            $(function () {
+                $('#lsuppliers').selectpicker();
+            });
+        });
+        $(document).ready(function () {
+            $(function () {
+                let articles = $("#larticles");
+                articles.html('<option value="">---------</option>');
+                articles.selectpicker();
+            });
+        });
+        $(document).ready(function () {
+            $(function () {
+                $('#lstatus').selectpicker();
+            });
+        });
+    </script>
+{% endblock %}

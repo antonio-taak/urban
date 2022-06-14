@@ -1,0 +1,42 @@
+{% extends 'single-tab.html' %}
+
+{% block tab_name %}{% block titolo %}Ordini{% endblock %}{% endblock %}
+{% block search_placeholder %}Cerca l'ordine{% endblock %}
+
+{% block gray-bar %}
+    <a id="non-arch" class="col-1_5 active">Non archiviati</a>
+    <a id="arch" class="col-sm-1">Archiviati</a>
+
+    <script>
+        $(document).on('click', 'a', function(){
+            $(this).addClass('active').siblings().removeClass('active')
+        })
+    </script>
+
+{% endblock %}
+
+{% block filters %}
+    <input type="date" class="filtro"></input>
+    <input type="date" class="filtro"></input>
+    <div class="dropdown">
+      <button class="filtro-drop dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+        <i class="fa-solid fa-filter"></i> Filtra per
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="#"> <input type="checkbox"> Da ordinare</a>
+        <a class="dropdown-item" href="#"> <input type="checkbox"> Ordinato</a>
+        <a class="dropdown-item" href="#"> <input type="checkbox"> In attesa</a>
+          <a class="dropdown-item" href="#"> <input type="checkbox"> In giacenza</a>
+          <a class="dropdown-item" href="#"> <input type="checkbox"> Da ritirare</a>
+          <a class="dropdown-item" href="#"> <input type="checkbox"> Consegnato</a>
+          <a class="dropdown-item" href="#"> <input type="checkbox"> Installato</a>
+
+      </div>
+    </div>
+
+{% endblock %}
+
+{% block table %}{% include "order/order_table.html" %}{% endblock %}
+
+{% block insert_form %}{% url 'order_create' %}{% endblock %}
+{% block download-csv %}{% url 'order_csv' %}{% endblock %}

@@ -1,0 +1,27 @@
+.blocco {
+    border: #94AA26 solid 2px;
+    border-radius: 10px;
+    height: 350px;
+    max-width: 400px;
+
+    margin-left: 41px;
+    margin-right: 41px;
+    margin-bottom: 63px;
+}
+
+.blocco img {
+    width: 200px;
+    height: 199px;
+    margin-top: 41px;
+}
+
+.blocco h3 {
+    font-weight: bold;
+    color: #94AA26;
+    margin-top: 14px;
+}
+
+.blocco:hover{
+    cursor:pointer;
+}
+
