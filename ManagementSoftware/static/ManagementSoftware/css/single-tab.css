@@ -4,6 +4,12 @@
     padding: 0px;
     margin-top: 50px;
 }
+@media (min-width: 1900px) {
+    #main-container{
+        max-width: 80vw !important;
+        margin-left: 2.5% !important;
+    }
+}
 #row-sopra{
     border-radius: 12px 12px 0px 0px;
     background: #F5F5F5 0% 0% no-repeat padding-box;
