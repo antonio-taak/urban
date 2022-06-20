@@ -30,7 +30,8 @@
         <div class="row search-bar">
             <div class="col-md-8">
                 <div class="form-group">
-                    <input type="text" class="form-control" id="search" placeholder="&#xf002 {% block search_placeholder %}{% endblock %}" aria-label="cerca">
+                    <input type="text" class="form-control" id="search"
+                           placeholder="{% block search_placeholder %}{% endblock %}" aria-label="cerca">
                 </div>
 
                 {% block filters %} {% endblock %}
@@ -107,15 +108,64 @@
             });
         });
 
+        let fromDate;
+        let toDate = 0;
+        let trDate;
         $("#fromDate").on("change", function () {
-            let fromDate = $(this).val();
+            let from = $(this).val().split("-");
+            fromDate = new Date(from[0], from[1], from[2]);
 
+            $("#risultati tbody tr").filter(function () {
+                let tr = $(this).find(".data").text().split("/");
+                $(this).show();
+                $(this).removeClass("filterHide");
+                trDate = new Date(tr[2], tr[1], tr[0])
+
+                if (toDate == 0) toDate = new Date(3000, 1, 1);
+
+                if (fromDate > trDate || toDate < trDate) {
+                    $(this).hide();
+                    $(this).addClass("filterHide");
+                }
+            })
         });
 
         $("#toDate").on("change", function () {
-            let toDate = $(this).val();
+            let to = $(this).val().split("-");
+            toDate = new Date(to[0], to[1], to[2]);
 
+            $("#risultati tbody tr").filter(function () {
+                let tr = $(this).find(".data").text().split("/");
+                $(this).show();
+                $(this).removeClass("filterHide")
+                trDate = new Date(tr[2], tr[1], tr[0])
+
+                if (fromDate > trDate || toDate < trDate) {
+                    $(this).hide();
+                    $(this).addClass("filterHide");
+                }
+            })
         });
+
+        $(".dropdown-menu input").on("change", function () {
+            let risultatiTr = $("#risultati tbody tr");
+            risultatiTr.hide();
+
+            $(".dropdown-menu input").each(function () {
+                let checkbox = $(this);
+                let filterName = $(this).parent().text();
+
+                if (checkbox.is(":checked")) {
+                    risultatiTr.filter(function () {
+                        if(!$(this).hasClass("filterHide"))
+                            return $(this).find(".status").text().toLowerCase().trim() === filterName.toLowerCase().trim()
+                    }).show();
+                }
+
+            })
+
+        })
+
 
     </script>
 {% endblock %}

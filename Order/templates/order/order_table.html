@@ -19,8 +19,8 @@
     <tr>
         <td>{{ order.article_id }}</td>
         <td>{{ order.article_id.supplier_id }}</td>
-        <td>{{ order.date | date:'d/m/Y' }}</td>
-        <td>{{ order.get_status_display }}</td>
+        <td class="data">{{ order.date | date:'d/m/Y' }}</td>
+        <td class="status">{{ order.get_status_display }}</td>
         <td>{{ order.quantity }}</td>
         <td>{{ order.article_id.measurement_unit }}</td>
         <td>{{ order.site_id }}</td>

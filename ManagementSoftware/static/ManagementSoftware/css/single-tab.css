@@ -7,8 +7,9 @@
 @media (min-width: 1900px) {
     #main-container{
         max-width: 80vw !important;
-        margin-left: 2.5% !important;
+        margin-left: 10% !important;
     }
+
 }
 #row-sopra{
     border-radius: 12px 12px 0px 0px;
